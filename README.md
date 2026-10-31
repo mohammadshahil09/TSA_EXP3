@@ -1,5 +1,5 @@
 # Ex.No: 03   COMPUTE THE AUTO FUNCTION(ACF)
-Date: 
+Date: 31:10:2026
 
 ### AIM:
 To Compute the AutoCorrelation Function (ACF) of the data for the first 35 lags to determine the model
@@ -11,33 +11,36 @@ type to fit the data.
 4. Store the results in an array
 5. Represent the result in graphical representation as given below.
 ### PROGRAM:
-import matplotlib.pyplot as plt
-
+```
 import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from statsmodels.graphics.tsaplots import plot_acf
 
-data = [3, 16, 156, 47, 246, 176, 233, 140, 130,
-101, 166, 201, 200, 116, 118, 247,
-209, 52, 153, 232, 128, 27, 192, 168, 208,
-187, 228, 86, 30, 151, 18, 254,
-76, 112, 67, 244, 179, 150, 89, 49, 83, 147, 90,
-33, 6, 158, 80, 35, 186, 127]
+# Load the dataset
+file_path = 'Gold Price Prediction.csv'  # Replace with your actual file path
+data = pd.read_csv(file_path)
 
-lags = range(35)
+# Convert 'Date' to datetime format
+data['Date'] = pd.to_datetime(data['Date'], format='%m/%d/%y')
+data.set_index('Date', inplace=True)
 
+# Use the 'Price Today' or any other relevant column for ACF calculation
+price_today = data['Price Today']
 
-#Pre-allocate autocorrelation table
+# Compute and plot ACF for the first 35 lags
+plt.figure(figsize=(10, 6))
+plot_acf(price_today, lags=35, alpha=0.05)  # ACF with 35 lags and confidence intervals
+plt.title('AutoCorrelation Function (ACF) for Gold Price')
+plt.xlabel('Lags')
+plt.ylabel('ACF Value')
+plt.grid(True)
+plt.show()
 
-#Mean
-
-#Variance
-
-#Normalized data
-
-#Go through lag components one-by-one
-
-#display the graph
+```
 
 ### OUTPUT:
+<img width="882" height="641" alt="image" src="https://github.com/user-attachments/assets/a79652c3-23c1-4f97-9c11-bcd48adbd141" />
 
 ### RESULT:
         Thus we have successfully implemented the auto correlation function in python.
